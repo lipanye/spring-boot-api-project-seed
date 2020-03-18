@@ -1,7 +1,6 @@
-package com.company.project.core;
+package com.company.system.core;
 
 import com.alibaba.fastjson.JSON;
-import lombok.Data;
 
 /**
  * @Author Lipanye_Arthur@163.com

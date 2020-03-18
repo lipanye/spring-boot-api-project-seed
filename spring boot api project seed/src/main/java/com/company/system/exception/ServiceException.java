@@ -1,4 +1,4 @@
-package com.company.project.exception;
+package com.company.system.exception;
 
 /**
  * @Author Lipanye_Arthur@163.com

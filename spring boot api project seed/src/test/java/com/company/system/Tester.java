@@ -1,6 +1,7 @@
-package com.company.project;
+package com.company.system;
 
 
+import com.company.SpringBootApiApplication;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;

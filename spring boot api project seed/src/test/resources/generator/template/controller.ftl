@@ -1,6 +1,6 @@
 package ${basePackage}.web;
-import ${basePackage}.core.Result;
-import ${basePackage}.core.ResultGenerator;
+import ${sysBasePackage}.core.Result;
+import ${sysBasePackage}.core.ResultGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ${sysBasePackage}.core.BaseController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 */
 @RestController
 @RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller {
+public class ${modelNameUpperCamel}Controller extends BaseController{
     @Resource
     private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 

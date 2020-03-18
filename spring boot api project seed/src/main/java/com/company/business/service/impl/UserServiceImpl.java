@@ -1,9 +1,9 @@
-package com.company.project.service.impl;
+package com.company.business.service.impl;
 
-import com.company.project.dao.UserMapper;
-import com.company.project.model.User;
-import com.company.project.service.UserService;
-import com.company.project.core.AbstractService;
+import com.company.business.dao.UserMapper;
+import com.company.business.model.User;
+import com.company.business.service.UserService;
+import com.company.system.core.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 
 /**
- * Created by CodeGenerator on 2020/03/17.
+ * Created by CodeGenerator on 2020/03/18.
  */
 @Service
 @Transactional

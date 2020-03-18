@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static com.company.project.core.ProjectConstant.*;
+import static com.company.system.core.ProjectConstant.*;
 
 /**
  * 代码生成器，根据数据表名称生成对应的Model、Mapper、Service、Controller简化开发。
@@ -143,6 +143,7 @@ public class CodeGenerator {
             data.put("modelNameUpperCamel", modelNameUpperCamel);
             data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
             data.put("basePackage", BASE_PACKAGE);
+            data.put("sysBasePackage", SYSTEM_BASE_PACKAGE);
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + modelNameUpperCamel + "Service.java");
             if (!file.getParentFile().exists()) {
@@ -176,6 +177,7 @@ public class CodeGenerator {
             data.put("modelNameUpperCamel", modelNameUpperCamel);
             data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
             data.put("basePackage", BASE_PACKAGE);
+            data.put("sysBasePackage", SYSTEM_BASE_PACKAGE);
 
             File file = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_CONTROLLER + modelNameUpperCamel + "Controller.java");
             if (!file.getParentFile().exists()) {
@@ -200,17 +202,20 @@ public class CodeGenerator {
     }
 
     private static String tableNameConvertLowerCamel(String tableName) {
-        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, tableName.toLowerCase());
+        String path = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, tableName.toLowerCase());
+        return path;
     }
 
     private static String tableNameConvertUpperCamel(String tableName) {
-        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());
+        String path = CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());
+        return path;
 
     }
 
     private static String tableNameConvertMappingPath(String tableName) {
         tableName = tableName.toLowerCase();//兼容使用大写的表名
-        return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
+        String path = "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
+        return path;
     }
 
     private static String modelNameConvertMappingPath(String modelName) {
@@ -220,7 +225,6 @@ public class CodeGenerator {
 
     private static String packageConvertPath(String packageName) {
         String path = String.format("/%s/", packageName.contains(".") ? packageName.replaceAll("\\.", "/") : packageName);
-        System.out.println(">>>>>>>>>>>>>>>path"+path);
         return path;
     }
 

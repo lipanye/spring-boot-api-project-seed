@@ -1,4 +1,4 @@
-package com.company.project.configurer;
+package com.company.system.configurer;
 
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.plugin.Interceptor;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 import java.util.Properties;
 
-import static com.company.project.core.ProjectConstant.*;
+import static com.company.system.core.ProjectConstant.*;
 
 
 /**

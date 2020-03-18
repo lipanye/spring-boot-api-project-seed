@@ -1,4 +1,4 @@
-package com.company.project.core;
+package com.company.system.core;
 
 /**
  * @Author Lipanye_Arthur@163.com

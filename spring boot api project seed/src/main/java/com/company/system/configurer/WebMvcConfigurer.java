@@ -1,16 +1,18 @@
-package com.company.project.configurer;
+package com.company.system.configurer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.company.project.core.Result;
-import com.company.project.core.ResultCode;
-import com.company.project.exception.ServiceException;
+import com.company.system.core.Result;
+import com.company.system.core.ResultCode;
+import com.company.system.core.TokenInterceptor;
+import com.company.system.exception.ServiceException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -42,6 +44,8 @@ import java.util.List;
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     protected final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
+    @Autowired
+    private TokenInterceptor tokenInterceptor;
 
     /**
      * 当前激活的配置
@@ -148,10 +152,14 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //简单接口签名认证拦截器，实际项目中可以使用Json Web Token或其他更好的方式替代。
+
+        //通过接口注解认证拦截器
+        registry.addInterceptor(tokenInterceptor);
+
         //开发环境忽略校验
-        if(!"dev".equals(env)){
-            registry.addInterceptor(new HandlerInterceptorAdapter() {
+        //if(!"dev".equals(env)){
+            //简单接口签名认证拦截器，实际项目中可以使用Json Web Token或其他更好的方式替代。
+            /*registry.addInterceptor(new HandlerInterceptorAdapter() {
                 @Override
                 public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                     //验证签名
@@ -167,10 +175,12 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
                         return false;
                     }
                 }
-            });
-        }
+            });*/
+            //registry.addInterceptor(tokenInterceptor);
+        //}
     }
 
+    /*
     private Object getIpAddress(HttpServletRequest request) {
         String ip =request.getHeader("x-forwarded-for");
         if(ip == null || ip.length() == 0 || "unknow".equalsIgnoreCase(ip)){
@@ -193,7 +203,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
             ip = ip.substring(0,ip.indexOf(",")).trim();
         }
         return ip;
-    }
+    }*/
 
     /**
      * 一个简单签名认证，规则：
@@ -203,7 +213,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
      * @param request
      * @return
      */
-    private boolean validateSign(HttpServletRequest request) {
+    /*private boolean validateSign(HttpServletRequest request) {
         //获取请求的签名：例如sign=19e907700db7ad91318424a97c54ed57
         String requestSign = request.getParameter("sign");
         if(StringUtils.isEmpty(requestSign)){
@@ -225,7 +235,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>linkString："+linkString);
         String sign = DigestUtils.md5Hex(linkString+secret);
         return StringUtils.equals(sign,requestSign);
-    }
+    }*/
 
 
 }

@@ -1,6 +1,6 @@
-package com.company.project.core;
+package com.company.system.core;
 
-import com.company.project.exception.ServiceException;
+import com.company.system.exception.ServiceException;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;

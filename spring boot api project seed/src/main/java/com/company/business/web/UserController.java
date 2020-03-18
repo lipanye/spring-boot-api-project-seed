@@ -1,27 +1,30 @@
-package com.company.project.web;
-import com.company.project.core.Result;
-import com.company.project.core.ResultGenerator;
-import com.company.project.model.User;
-import com.company.project.service.UserService;
+package com.company.business.web;
+import com.company.system.annotation.TokenAnnotation;
+import com.company.system.core.Result;
+import com.company.system.core.ResultGenerator;
+import com.company.business.model.User;
+import com.company.business.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.company.system.core.BaseController;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
-* Created by CodeGenerator on 2020/03/17.
+* Created by CodeGenerator on 2020/03/18.
 */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
     @Resource
     private UserService userService;
 
+    @TokenAnnotation
     @PostMapping("/add")
     public Result add(User user) {
         userService.save(user);
